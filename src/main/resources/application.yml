@@ -1,0 +1,27 @@
+
+server:
+  port: 20595
+
+info:
+  artifactId: "${project.name}"
+  version: "${project.version}"
+
+spring:
+  datasource:
+    initialize: true
+    url: jdbc:h2:mem:starwars;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: sa
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+integration:
+  swapi-client:
+    base-url: https://swapi.co/api
