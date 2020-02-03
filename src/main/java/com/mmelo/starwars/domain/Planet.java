@@ -21,18 +21,15 @@ public class Planet extends Auditable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     private String name;
 
     @Column(name = "climate")
-    @ElementCollection
-    private List<String> climate;
+    private String climate;
 
     @Column(name = "terrain")
-    @ElementCollection
-    private List<String> terrain;
+    private String terrain;
 
-    @Builder.Default
-    @Column(name = "flg_enabled")
-    private Boolean enabled = true;
+    @Column(name = "quantity_films")
+    private Integer quantityFilms;
 }

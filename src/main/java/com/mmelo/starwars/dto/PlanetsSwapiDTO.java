@@ -6,12 +6,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PlanetSwapiDTO {
+public class PlanetsSwapiDTO {
 
-    @JsonProperty("next")
-    private String next;
+    @JsonProperty("results")
+    private List<PlanetSwapiItemDTO> itemDTO;
 }
