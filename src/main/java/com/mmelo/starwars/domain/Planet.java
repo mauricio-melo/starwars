@@ -31,5 +31,5 @@ public class Planet extends Auditable {
     private String terrain;
 
     @Column(name = "quantity_films")
-    private Long quantityFilms;
+    private int quantityFilms;
 }

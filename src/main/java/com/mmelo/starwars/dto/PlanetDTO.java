@@ -10,8 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class PlanetDTO {
+    private Long id;
     private String name;
     private String climate;
     private String terrain;
-    private Integer quantityFilms;
+    private int quantityFilms;
 }

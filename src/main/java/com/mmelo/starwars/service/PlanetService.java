@@ -25,7 +25,7 @@ public class PlanetService {
                 .name(dto.getName())
                 .climate(dto.getClimate())
                 .terrain(dto.getTerrain())
-                .quantityFilms((long) quantityFilms)
+                .quantityFilms(quantityFilms)
                 .build());
         return modelMapper.map(planet, PlanetDTO.class);
     }
