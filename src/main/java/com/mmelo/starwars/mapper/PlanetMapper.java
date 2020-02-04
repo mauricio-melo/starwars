@@ -1,7 +1,7 @@
 package com.mmelo.starwars.mapper;
 
 import com.mmelo.starwars.dto.PlanetDTO;
-import com.mmelo.starwars.dto.PlanetsSwapiDTO;
+import com.mmelo.starwars.dto.integration.PlanetsSwapiDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

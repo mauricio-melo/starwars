@@ -2,7 +2,7 @@ package com.mmelo.starwars.service;
 
 import com.mmelo.starwars.config.HeaderSwapi;
 import com.mmelo.starwars.dto.PlanetDTO;
-import com.mmelo.starwars.dto.PlanetsSwapiDTO;
+import com.mmelo.starwars.dto.integration.PlanetsSwapiDTO;
 import com.mmelo.starwars.exception.ResourceNotFoundException;
 import com.mmelo.starwars.exception.SwapiInternalError;
 import com.mmelo.starwars.integration.SwapiClient;

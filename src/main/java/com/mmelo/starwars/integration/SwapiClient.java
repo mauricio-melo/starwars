@@ -1,6 +1,6 @@
 package com.mmelo.starwars.integration;
 
-import com.mmelo.starwars.dto.PlanetsSwapiDTO;
+import com.mmelo.starwars.dto.integration.PlanetsSwapiDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

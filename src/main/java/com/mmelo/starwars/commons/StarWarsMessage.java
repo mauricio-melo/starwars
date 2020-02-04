@@ -11,7 +11,9 @@ public enum StarWarsMessage {
 
     SERVER_ERROR("An unexpected error has occurred. Please try again"),
 
-    RESOURCE_NOT_FOUND("Requested resource could not be found");
+    RESOURCE_NOT_FOUND("Requested resource could not be found"),
+
+    RESOURCE_ALREADY_EXISTS("Resource already exists");
 
     private final String message;
 }

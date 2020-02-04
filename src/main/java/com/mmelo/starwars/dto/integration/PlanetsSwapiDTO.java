@@ -1,4 +1,4 @@
-package com.mmelo.starwars.dto;
+package com.mmelo.starwars.dto.integration;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

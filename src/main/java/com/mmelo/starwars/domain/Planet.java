@@ -2,8 +2,8 @@ package com.mmelo.starwars.domain;
 
 import com.mmelo.starwars.commons.Auditable;
 import lombok.*;
+
 import javax.persistence.*;
-import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -18,10 +18,10 @@ public class Planet extends Auditable {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id_planet")
     private Long id;
 
-    @Column(name = "name", unique = true)
+    @Column(name = "name_planet", unique = true)
     private String name;
 
     @Column(name = "climate")
@@ -31,5 +31,5 @@ public class Planet extends Auditable {
     private String terrain;
 
     @Column(name = "quantity_films")
-    private Integer quantityFilms;
+    private Long quantityFilms;
 }

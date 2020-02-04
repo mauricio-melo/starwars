@@ -20,11 +20,12 @@ public class PlanetService {
     private final ModelMapper modelMapper;
 
     public PlanetDTO savePlanet(final PlanetDTO dto) {
+        final int quantityFilms = clientService.getQuantityFilmsByPlanet(dto.getName());
         final Planet planet = repository.save(Planet.builder()
                 .name(dto.getName())
                 .climate(dto.getClimate())
                 .terrain(dto.getTerrain())
-                .quantityFilms(clientService.getQuantityFilmsByPlanet(dto.getName()))
+                .quantityFilms((long) quantityFilms)
                 .build());
         return modelMapper.map(planet, PlanetDTO.class);
     }
