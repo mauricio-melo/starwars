@@ -50,6 +50,6 @@ public class PlanetController {
 
     @DeleteMapping(path = "/{id}")
     public void deletePlanetById(@PathVariable final Long id) {
-        this.service.deletePlanetById(id);
+        service.deletePlanetById(id);
     }
 }
