@@ -24,7 +24,7 @@ public class PlanetController {
     private final ModelMapper modelMapper;
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
-    public PlanetDTO save(@Valid @RequestBody final PlanetRequestDTO dto) {
+    public PlanetDTO savePlanet(@Valid @RequestBody final PlanetRequestDTO dto) {
         return service.savePlanet(modelMapper.map(dto, PlanetDTO.class));
     }
 

@@ -11,10 +11,9 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -29,7 +28,7 @@ public class PlanetServiceTest {
     private PlanetRepository repository;
 
     @Mock
-    private SwapiClientService swapiClientService;
+    private SwapiClientService clientService;
 
     @Mock
     private ModelMapper modelMapper;
@@ -40,12 +39,47 @@ public class PlanetServiceTest {
     }
 
     @Test
+    public void savePLanet() {
+        final int quantityFilms = 1;
+
+        final Planet planetMock = Planet.builder()
+                .id(1L)
+                .name("Alderaan")
+                .climate("temperate")
+                .terrain("grasslands")
+                .build();
+
+        final PlanetDTO planetDTOMock = PlanetDTO.builder()
+                .id(1L)
+                .name("Alderaan")
+                .climate("temperate")
+                .terrain("grasslands")
+                .build();
+
+        when(clientService.getQuantityFilmsByPlanet(anyString())).thenReturn(quantityFilms);
+        when(repository.save(any())).thenReturn(planetMock);
+        when(modelMapper.map(any(), any())).thenReturn(planetDTOMock);
+
+        final PlanetDTO planetDTO = service.savePlanet(planetDTOMock);
+
+        assertNotNull(planetDTO);
+        assertEquals(planetDTO.getId(), planetMock.getId());
+        assertEquals(planetDTO.getName(), planetMock.getName());
+        assertEquals(planetDTO.getClimate(), planetMock.getClimate());
+        assertEquals(planetDTO.getTerrain(), planetMock.getTerrain());
+        assertEquals(planetDTO.getQuantityFilms(), planetMock.getQuantityFilms());
+        verify(repository, times(1)).save(any());
+        verify(modelMapper, times(1)).map(any(), any());
+        verify(clientService, times(1)).getQuantityFilmsByPlanet(anyString());
+    }
+
+    @Test
     public void getPlanets() {
-        final List<Planet> planetsMock = getPlanetList(1);
+        final List<Planet> planetsMock = getPlanetList();
         when(repository.findAll()).thenReturn(planetsMock);
         when(modelMapper.map(any(), any())).thenReturn(new PlanetDTO());
 
-        List<PlanetDTO> planetDTOS = service.getPlanets();
+        final List<PlanetDTO> planetDTOS = service.getPlanets();
 
         assertFalse(planetDTOS.isEmpty());
         verify(modelMapper, times(1)).map(any(), any());
@@ -54,8 +88,8 @@ public class PlanetServiceTest {
 
     @Test
     public void getClientPlanets() {
-        final List<PlanetDTO> planetsDTOMock = getPlanetDTOList(getPlanetList(1));
-        when(swapiClientService.getPlanets()).thenReturn(planetsDTOMock);
+        final List<PlanetDTO> planetsDTOMock = getPlanetDTOList();
+        when(clientService.getPlanets()).thenReturn(planetsDTOMock);
 
         final List<PlanetDTO> planetDTOS = service.getClientPlanets();
 
@@ -65,7 +99,7 @@ public class PlanetServiceTest {
         assertEquals(planetDTOS.get(0).getClimate(), planetsDTOMock.get(0).getClimate());
         assertEquals(planetDTOS.get(0).getTerrain(), planetsDTOMock.get(0).getTerrain());
         assertEquals(planetDTOS.get(0).getQuantityFilms(), planetsDTOMock.get(0).getQuantityFilms());
-        verify(swapiClientService, times(1)).getPlanets();
+        verify(clientService, times(1)).getPlanets();
     }
 
     @Test
@@ -139,29 +173,23 @@ public class PlanetServiceTest {
         verify(repository, times(1)).deleteById(anyLong());
     }
 
-    private List<Planet> getPlanetList(final int size) {
-        final List<Planet> planets = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            planets.add(Planet.builder()
-                    .id((long) i)
-                    .name("Alderaan" + i)
-                    .climate("temperate")
-                    .terrain("grasslands")
-                    .quantityFilms(i)
-                    .build());
-        }
-        return planets;
+    private List<Planet> getPlanetList() {
+        return Collections.singletonList(Planet.builder()
+                .id(1L)
+                .name("Alderaan")
+                .climate("temperate")
+                .terrain("grasslands")
+                .quantityFilms(1)
+                .build());
     }
 
-    private List<PlanetDTO> getPlanetDTOList(final List<Planet> planet) {
-        return planet.stream()
-                .map(item -> PlanetDTO.builder()
-                        .id(item.getId())
-                        .name(item.getName())
-                        .climate(item.getClimate())
-                        .terrain(item.getTerrain())
-                        .quantityFilms(item.getQuantityFilms())
-                        .build())
-                .collect(Collectors.toList());
+    private List<PlanetDTO> getPlanetDTOList() {
+        return Collections.singletonList(PlanetDTO.builder()
+                .id(1L)
+                .name("Alderaan")
+                .climate("temperate")
+                .terrain("grasslands")
+                .quantityFilms(1)
+                .build());
     }
 }
