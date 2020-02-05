@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum StarWarsMessage {
 
-    SERVER_ERROR_SWAPI("SAn unexpected error has occurred in SWAPI. Please try again"),
+    SERVER_ERROR_SWAPI("An unexpected error has occurred in SWAPI. Please try again"),
 
     SERVER_ERROR("An unexpected error has occurred. Please try again"),
 
